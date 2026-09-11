@@ -1,189 +1,149 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MeuApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MeuApp extends StatelessWidget {
+  const MeuApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Cadastro de Cliente',
+      title: 'Projetos Flutter',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF8064A2),
+          seedColor: Colors.indigo,
         ),
         useMaterial3: true,
       ),
-      home: const TelaCadastro(),
+      home: const TelaInicial(),
     );
   }
 }
 
 // ===============================
-// TELA 1 - CADASTRO
+// TELA INICIAL
 // ===============================
 
-class TelaCadastro extends StatefulWidget {
-  const TelaCadastro({super.key});
-
-  @override
-  State<TelaCadastro> createState() => _TelaCadastroState();
-}
-
-class _TelaCadastroState extends State<TelaCadastro> {
-  final TextEditingController nomeController = TextEditingController();
-
-  final TextEditingController cidadeController = TextEditingController();
-
-  void cadastrar() {
-    String nome = nomeController.text;
-    String cidade = cidadeController.text;
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => TelaResumo(
-          nome: nome,
-          cidade: cidade,
-        ),
-      ),
-    );
-  }
+class TelaInicial extends StatelessWidget {
+  const TelaInicial({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F3FA),
-
       appBar: AppBar(
-        title: const Text(
-          'Cadastro de Cliente',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        title: const Text('Atividades Flutter'),
         centerTitle: true,
-        backgroundColor: const Color(0xFF8064A2),
-        foregroundColor: Colors.white,
       ),
-
       body: Padding(
-        padding: const EdgeInsets.all(25),
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 20),
 
-        child: Center(
-          child: SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.all(25),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(18),
-              ),
-
-              child: Column(
-                children: [
-
-                  const Icon(
-                    Icons.person_add,
-                    size: 65,
-                    color: Color(0xFF8064A2),
-                  ),
-
-                  const SizedBox(height: 15),
-
-                  const Text(
-                    'Novo cliente',
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF3D3542),
-                    ),
-                  ),
-
-                  const SizedBox(height: 8),
-
-                  const Text(
-                    'Preencha os dados abaixo.',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.grey,
-                    ),
-                  ),
-
-                  const SizedBox(height: 28),
-
-                  // Nome
-                  TextField(
-                    controller: nomeController,
-                    decoration: InputDecoration(
-                      labelText: 'Nome',
-                      hintText: 'Digite o nome',
-                      prefixIcon: const Icon(
-                        Icons.person_outline,
-                      ),
-                      filled: true,
-                      fillColor: const Color(0xFFF8F6FA),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  // Cidade
-                  TextField(
-                    controller: cidadeController,
-                    decoration: InputDecoration(
-                      labelText: 'Cidade',
-                      hintText: 'Digite a cidade',
-                      prefixIcon: const Icon(
-                        Icons.location_city,
-                      ),
-                      filled: true,
-                      fillColor: const Color(0xFFF8F6FA),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 28),
-
-                  // Botão
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-
-                    child: ElevatedButton(
-                      onPressed: cadastrar,
-
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF8064A2),
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-
-                      child: const Text(
-                        'Cadastrar',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+            const Text(
+              'Projetos',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
               ),
             ),
-          ),
+
+            const SizedBox(height: 10),
+
+            const Text(
+              'Escolha uma atividade para visualizar',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+              ),
+            ),
+
+            const SizedBox(height: 30),
+
+            // CARTÃO DE FUNCIONÁRIO
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const CartaoFuncionario(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.badge),
+              label: const Text('Cartão de Funcionário'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(18),
+              ),
+            ),
+
+            const SizedBox(height: 15),
+
+            // LISTA DE FUNCIONÁRIOS
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const ListaFuncionarios(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.people),
+              label: const Text('Lista de Funcionários'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(18),
+              ),
+            ),
+
+            const SizedBox(height: 15),
+
+            // CATÁLOGO
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const CatalogoProdutos(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.shopping_bag),
+              label: const Text('Catálogo de Produtos'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(18),
+              ),
+            ),
+
+            const SizedBox(height: 15),
+
+            // CONTATOS
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const ListaContatos(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.contacts),
+              label: const Text('Lista de Contatos'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(18),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -191,129 +151,268 @@ class _TelaCadastroState extends State<TelaCadastro> {
 }
 
 // ===============================
-// TELA 2 - RESUMO
+// 1 - CARTÃO DE FUNCIONÁRIO
 // ===============================
 
-class TelaResumo extends StatelessWidget {
-  final String nome;
-  final String cidade;
-
-  const TelaResumo({
-    super.key,
-    required this.nome,
-    required this.cidade,
-  });
+class CartaoFuncionario extends StatelessWidget {
+  const CartaoFuncionario({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F3FA),
-
       appBar: AppBar(
-        title: const Text(
-          'Resumo',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: const Color(0xFF8064A2),
-        foregroundColor: Colors.white,
+        title: const Text('Cartão de Funcionário'),
       ),
-
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(25),
-
-          child: Container(
-            width: double.infinity,
+        child: Card(
+          margin: const EdgeInsets.all(20),
+          elevation: 5,
+          child: Padding(
             padding: const EdgeInsets.all(25),
-
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(18),
-            ),
-
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-
               children: [
+                Image.asset(
+                  'assets/funcionario.png',
+                  width: 120,
+                  height: 120,
+                  fit: BoxFit.cover,
+                ),
 
-                const Center(
-                  child: Icon(
-                    Icons.check_circle_outline,
-                    size: 65,
-                    color: Color(0xFF8064A2),
+                const SizedBox(height: 20),
+
+                const Text(
+                  'Maria Silva',
+                  style: TextStyle(
+                    fontSize: 23,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
 
-                const SizedBox(height: 18),
+                const SizedBox(height: 8),
 
-                const Center(
-                  child: Text(
-                    'Cadastro realizado!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF3D3542),
-                    ),
+                const Text(
+                  'Desenvolvedora de Sistemas',
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
                 ),
 
-                const SizedBox(height: 30),
+                const SizedBox(height: 5),
 
-                Text(
-                  'Nome: $nome',
-                  style: const TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-
-                const SizedBox(height: 15),
-
-                Text(
-                  'Cidade: $cidade',
-                  style: const TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-
-                const SizedBox(height: 30),
-
-                SizedBox(
-                  width: double.infinity,
-                  height: 48,
-
-                  child: OutlinedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: const Color(0xFF8064A2),
-                      side: const BorderSide(
-                        color: Color(0xFF8064A2),
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-
-                    child: const Text(
-                      'Voltar',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                const Text(
+                  'Setor: Tecnologia',
+                  style: TextStyle(
+                    color: Colors.grey,
                   ),
                 ),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+// ===============================
+// 2 - LISTA DE FUNCIONÁRIOS
+// ===============================
+
+class ListaFuncionarios extends StatelessWidget {
+  const ListaFuncionarios({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Lista de Funcionários'),
+      ),
+      body: ListView(
+        children: const [
+          ListTile(
+            leading: CircleAvatar(
+              child: Icon(Icons.person),
+            ),
+            title: Text('Ana Souza'),
+            subtitle: Text('Analista de Sistemas'),
+          ),
+
+          Divider(),
+
+          ListTile(
+            leading: CircleAvatar(
+              child: Icon(Icons.person),
+            ),
+            title: Text('Carlos Oliveira'),
+            subtitle: Text('Desenvolvedor'),
+          ),
+
+          Divider(),
+
+          ListTile(
+            leading: CircleAvatar(
+              child: Icon(Icons.person),
+            ),
+            title: Text('Juliana Santos'),
+            subtitle: Text('Gerente de Projetos'),
+          ),
+
+          Divider(),
+
+          ListTile(
+            leading: CircleAvatar(
+              child: Icon(Icons.person),
+            ),
+            title: Text('Lucas Pereira'),
+            subtitle: Text('Suporte Técnico'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ===============================
+// 3 - CATÁLOGO DE PRODUTOS
+// ===============================
+
+class CatalogoProdutos extends StatelessWidget {
+  const CatalogoProdutos({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Catálogo de Produtos'),
+      ),
+      body: ListView(
+        children: const [
+          ListTile(
+            leading: Icon(Icons.headphones),
+            title: Text('Fone de Ouvido'),
+            trailing: Text(
+              'R\$ 89,90',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+
+          Divider(),
+
+          ListTile(
+            leading: Icon(Icons.phone_android),
+            title: Text('Smartphone'),
+            trailing: Text(
+              'R\$ 1.299,90',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+
+          Divider(),
+
+          ListTile(
+            leading: Icon(Icons.keyboard),
+            title: Text('Teclado Mecânico'),
+            trailing: Text(
+              'R\$ 249,90',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+
+          Divider(),
+
+          ListTile(
+            leading: Icon(Icons.mouse),
+            title: Text('Mouse Gamer'),
+            trailing: Text(
+              'R\$ 149,90',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+
+          Divider(),
+
+          ListTile(
+            leading: Icon(Icons.watch),
+            title: Text('Smartwatch'),
+            trailing: Text(
+              'R\$ 399,90',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ===============================
+// 4 - LISTA DE CONTATOS
+// ===============================
+
+class ListaContatos extends StatelessWidget {
+  const ListaContatos({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Lista de Contatos'),
+      ),
+      body: ListView(
+        children: const [
+          ListTile(
+            leading: CircleAvatar(
+              child: Icon(Icons.person),
+            ),
+            title: Text('Ana'),
+            subtitle: Text('(12) 99999-1111'),
+            trailing: Icon(Icons.phone),
+          ),
+
+          Divider(),
+
+          ListTile(
+            leading: CircleAvatar(
+              child: Icon(Icons.person),
+            ),
+            title: Text('Carlos'),
+            subtitle: Text('(12) 98888-2222'),
+            trailing: Icon(Icons.phone),
+          ),
+
+          Divider(),
+
+          ListTile(
+            leading: CircleAvatar(
+              child: Icon(Icons.person),
+            ),
+            title: Text('Juliana'),
+            subtitle: Text('(12) 97777-3333'),
+            trailing: Icon(Icons.phone),
+          ),
+
+          Divider(),
+
+          ListTile(
+            leading: CircleAvatar(
+              child: Icon(Icons.person),
+            ),
+            title: Text('Lucas'),
+            subtitle: Text('(12) 96666-4444'),
+            trailing: Icon(Icons.phone),
+          ),
+        ],
       ),
     );
   }
